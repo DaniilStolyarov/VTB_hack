@@ -14,6 +14,7 @@ app.post('/destination', express.json(), async (req, res) =>
     }
     const answer = await db.filterPoints(req.body.criteria);
     res.json(JSON.stringify(answer.rows))
+    console.log(req.body)
 })
 
 app.listen(8080)
