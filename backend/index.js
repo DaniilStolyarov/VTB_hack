@@ -7,7 +7,7 @@ const app = express();
 
 app.post('/destination', express.json(), async (req, res) =>
 {
-    if (!criteria) 
+    if (!req.body.criteria) 
     {
         res.send('err: no criteria specified')
         return;
