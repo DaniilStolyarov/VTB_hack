@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <network-security-config>
     <domain-config cleartextTrafficPermitted="true">
+<<<<<<< HEAD
         <domain includeSubdomains="true">http://141.8.194.205</domain>
+=======
+        <domain includeSubdomains="true">141.8.194.205</domain>
+>>>>>>> b88d0ba02436c3be6396991c2b0c96e549ebcfed
     </domain-config>
 </network-security-config>
