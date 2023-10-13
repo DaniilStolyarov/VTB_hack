@@ -1,0 +1,10 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.VTB_hack" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="imageButtonStyle">@style/ImageButton.night</item>
+    </style>
+
+    <style name="ImageButton.night" parent="ImageButton">
+
+    </style>
+</resources>
