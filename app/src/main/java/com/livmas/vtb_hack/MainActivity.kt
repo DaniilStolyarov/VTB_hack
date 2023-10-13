@@ -1,11 +1,44 @@
 package com.livmas.vtb_hack
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
+import com.livmas.vtb_hack.databinding.ActivityMainBinding
+import com.livmas.vtb_hack.object_creators.Locator
+import com.yandex.mapkit.MapKit
+import com.yandex.mapkit.MapKitFactory
 
 class MainActivity : AppCompatActivity() {
+    lateinit var mapkit: MapKit
+    lateinit var binding: ActivityMainBinding
+    val holder: MapObjectHolder by viewModels()
+
+    private lateinit var locator: Locator
     override fun onCreate(savedInstanceState: Bundle?) {
+        presetMap()
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        locator = Locator(this)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        mapkit.onStart()
+        binding.mvMap.onStart()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        mapkit.onStop()
+        binding.mvMap.onStop()
+    }
+
+    private fun presetMap() {
+        val key = BuildConfig.MAPKIT_API_KEY
+        MapKitFactory.setApiKey(key)
+        MapKitFactory.initialize(this)
+        mapkit = MapKitFactory.getInstance()
     }
 }
