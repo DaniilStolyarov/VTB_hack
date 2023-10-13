@@ -1,0 +1,6 @@
+{
+    "host" : "localhost",
+    "database" : "vtb_database",
+    "user" : "postgres",
+    "password" : "postgres"
+}
