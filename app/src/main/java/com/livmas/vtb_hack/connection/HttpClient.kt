@@ -4,12 +4,12 @@ import android.util.Log
 import com.livmas.vtb_hack.BuildConfig
 import com.livmas.vtb_hack.MainActivity
 import com.yandex.mapkit.geometry.Point
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.lang.Exception
 
 class HttpClient(private val activity: MainActivity) {
     private val tag = "http"
@@ -30,15 +30,20 @@ class HttpClient(private val activity: MainActivity) {
             BankRequest(
                 point.latitude,
                 point.longitude,
-                "111000000000000"
+                "111111111111111"
             )
         )
 
         CoroutineScope(Dispatchers.IO).launch{
-            val res = call.execute()
-            handler.handle(res)
+            try {
+                val res = call.execute()
+                handler.handle(res)
+                Log.d(tag, "Response handled")
+            }
+            catch (e: Exception) {
+                Log.d(tag, e.message.toString())
+            }
 
-            Log.d(tag, "Response handled")
         }
     }
 }
