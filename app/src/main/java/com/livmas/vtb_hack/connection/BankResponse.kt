@@ -2,14 +2,14 @@ package com.livmas.vtb_hack.connection
 
 import com.google.gson.annotations.SerializedName
 
-data class Response(
+data class BankResponse(
     @SerializedName("ADRESS")
     @Transient
     val address: String?,
     @SerializedName("LATITUDE")
-    val latitude: Float,
+    val latitude: Double,
     @SerializedName("LONGITUDE")
-    val longitude: Float,
+    val longitude: Double,
     @SerializedName("CRITERIA")
     val criteria: String,
     @SerializedName("TYPE")

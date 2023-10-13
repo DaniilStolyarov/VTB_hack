@@ -1,4 +1,4 @@
-package com.livmas.vtb_hack.object_creators
+package com.livmas.vtb_hack.object_creaters
 
 import android.Manifest
 import android.util.Log
@@ -25,7 +25,7 @@ class Locator(private val activity: MainActivity) {
                     override fun onLocationUpdated(p0: com.yandex.mapkit.location.Location) {
                         val loc = p0.position
                         Log.d(tag, "${loc.latitude}; ${loc.longitude}")
-                        holder.userLocation.value = loc
+                        holder.location = loc
                     }
 
                     override fun onLocationStatusUpdated(p0: LocationStatus) {

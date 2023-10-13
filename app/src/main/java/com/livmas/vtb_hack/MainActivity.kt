@@ -1,26 +1,30 @@
 package com.livmas.vtb_hack
 
 import android.os.Bundle
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.livmas.vtb_hack.databinding.ActivityMainBinding
-import com.livmas.vtb_hack.object_creators.Locator
+import com.livmas.vtb_hack.object_creaters.Locator
+import com.livmas.vtb_hack.object_creaters.Marker
 import com.yandex.mapkit.MapKit
 import com.yandex.mapkit.MapKitFactory
+import com.yandex.mapkit.geometry.Point
 
 class MainActivity : AppCompatActivity() {
     lateinit var mapkit: MapKit
     lateinit var binding: ActivityMainBinding
-    val holder: MapObjectHolder by viewModels()
+    lateinit var holder: MapObjectsHolder
 
     private lateinit var locator: Locator
+    private lateinit var marker: Marker
     override fun onCreate(savedInstanceState: Bundle?) {
         presetMap()
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        holder = MapObjectsHolder(binding.mvMap.map.mapObjects)
 
         locator = Locator(this)
+        marker = Marker(this)
     }
 
     override fun onStart() {

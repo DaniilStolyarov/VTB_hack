@@ -8,5 +8,5 @@ interface MainApi {
 
     @POST("/")
     fun senLocation(@Query("latitude") latitude: Float,
-             @Query("longitude") longitude: Float): Call<Response>
+             @Query("longitude") longitude: Float): Call<BankResponse>
 }
