@@ -36,8 +36,9 @@ async function writeRawPoints()
 {
     const atms = require('./raw_data/atms.json').atms;
     const offices = require('./raw_data/offices.json');
-
-    atms.forEach(async atm => {
+    let i = 0;
+    for (let atm of atms)
+    {
         const criteria = '111000000000000';
         await client.query(`INSERT INTO POINTS(
             ADRESS,
@@ -58,10 +59,13 @@ async function writeRawPoints()
         )`,[atm.address, atm.latitude, atm.longitude, atm.allDay,
             criteria, 0, 0]) 
         // todo : think about time
-    });
+        console.log(i)
+        i++
+    }
+   
 
-    offices.forEach(async office =>
-        {   
+    for (let office of offices)
+    {
         const criteria = genRandomCriteria();
         await client.query(`INSERT INTO POINTS(
             ADRESS,
@@ -82,7 +86,10 @@ async function writeRawPoints()
         )`,[office.address, office.latitude, office.longitude, 
             {openHours: office.openHours, openHoursIndividual: office.openHoursIndividual},
             criteria, 1, Math.random() * 100]) 
-        })
+        console.log(i)
+        i++
+    }
+    
         
 }
 async function filterPoints(criteria)
