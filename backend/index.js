@@ -16,7 +16,7 @@ app.post('/destination', express.json(), async (req, res) =>
     res.json(answer.rows)
     console.log(req.body)
     console.log('answer: ')
-    console.log(JSON.stringify(answer.rows))
+    console.log(JSON.stringify(answer.rows.slice(0, 5)))
 })
 
 app.listen(8080)
