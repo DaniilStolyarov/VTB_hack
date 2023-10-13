@@ -2,6 +2,7 @@ package com.livmas.vtb_hack
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.livmas.vtb_hack.connection.HttpClient
 import com.livmas.vtb_hack.databinding.ActivityMainBinding
 import com.livmas.vtb_hack.object_creaters.Locator
 import com.livmas.vtb_hack.object_creaters.Marker
@@ -16,6 +17,8 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var locator: Locator
     private lateinit var marker: Marker
+
+    private val client = HttpClient(this)
     override fun onCreate(savedInstanceState: Bundle?) {
         presetMap()
         super.onCreate(savedInstanceState)
@@ -25,6 +28,8 @@ class MainActivity : AppCompatActivity() {
 
         locator = Locator(this)
         marker = Marker(this)
+
+        initButtons()
     }
 
     override fun onStart() {
@@ -44,5 +49,11 @@ class MainActivity : AppCompatActivity() {
         MapKitFactory.setApiKey(key)
         MapKitFactory.initialize(this)
         mapkit = MapKitFactory.getInstance()
+    }
+
+    private fun initButtons() {
+        binding.fabRequest.setOnClickListener {
+            client.query(Point(10.0, 23.0))
+        }
     }
 }

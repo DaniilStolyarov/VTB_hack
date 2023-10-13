@@ -19,8 +19,10 @@ android {
         Properties localProperties = new Properties()
         localProperties.load(project.rootProject.file('local.properties').newDataInputStream())
         def mapkitApiKey = localProperties.getProperty("MAPKIT_API_KEY", "")
+        def baseUrl = localProperties.getProperty("BASE_URL", "")
 
         buildConfigField "String", "MAPKIT_API_KEY", "\"${mapkitApiKey}\""
+        buildConfigField "String", "BASE_URL", "\"$baseUrl\""
 
         buildTypes {
             buildTypes {
