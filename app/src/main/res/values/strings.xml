@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">VTB_hack</string>
+    <string name="server_error">Что-то пошло не так на сервере</string>
+</resources>
