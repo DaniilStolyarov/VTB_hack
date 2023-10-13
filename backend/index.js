@@ -13,7 +13,7 @@ app.post('/destination', express.json(), async (req, res) =>
         return;
     }
     const answer = await db.filterPoints(req.body.criteria);
-    res.json(answer.rows)
+    res.json(answer.rows.slice(0,5))
     console.log(req.body)
     console.log('answer: ')
     console.log(JSON.stringify(answer.rows.slice(0, 5)))
