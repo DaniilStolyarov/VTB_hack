@@ -79,8 +79,7 @@
         app:maxImageSize="50dp"
         app:srcCompat="?android:attr/actionModeWebSearchDrawable" />
 
-<<<<<<< HEAD
-=======
+
     <ProgressBar
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyle"
@@ -92,6 +91,4 @@
 
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
->>>>>>> b88d0ba02436c3be6396991c2b0c96e549ebcfed
 </androidx.constraintlayout.widget.ConstraintLayout>

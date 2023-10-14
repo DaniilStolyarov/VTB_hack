@@ -92,13 +92,13 @@ async function writeRawPoints()
     
         
 }
-async function filterPoints(criteria)
+async function filterPoints(criteria, latitude, longitude)
 {
     if (criteria.length != 15) return;
 
-    return client.query('select * from points where (criteria & $1::varbit(15)) = $1::varbit(15)', [criteria]);
+    return client.query('select * from points where (criteria & $1::varbit(15)) = $1::varbit(15) order by ((latitude - $2) ^ 2 + (longitude - $3) ^ 2) LIMIT 5', [criteria, latitude, longitude]);
 }
-module.exports = {filterPoints}
+module.exports = {filterPoints}     
 
 async function initDatabase()
 {

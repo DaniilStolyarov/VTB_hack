@@ -1,23 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<<<<<<< HEAD
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-=======
 <manifest android:targetSandboxVersion="1"
     xmlns:android="http://schemas.android.com/apk/res/android"
->>>>>>> b88d0ba02436c3be6396991c2b0c96e549ebcfed
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.INTERNET"/>
 
-<<<<<<< HEAD
-    <application
-=======
-
     <application
         android:usesCleartextTraffic="true"
->>>>>>> b88d0ba02436c3be6396991c2b0c96e549ebcfed
         android:networkSecurityConfig="@xml/network_security_config"
 
         android:allowBackup="true"

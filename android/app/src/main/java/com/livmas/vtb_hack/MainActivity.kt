@@ -26,11 +26,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         holder = MapObjectsHolder(binding.mvMap.map.mapObjects)
 
-<<<<<<< HEAD
-=======
+
         binding.mvMap.map.isNightModeEnabled = true
 
->>>>>>> b88d0ba02436c3be6396991c2b0c96e549ebcfed
         locator = Locator(this)
         marker = Marker(this)
 
