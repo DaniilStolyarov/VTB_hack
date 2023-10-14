@@ -9,8 +9,10 @@ import com.livmas.vtb_hack.fragments.InputFragment
 import com.livmas.vtb_hack.object_creaters.Locator
 import com.livmas.vtb_hack.object_creaters.Marker
 import com.livmas.vtb_hack.object_creaters.TotalRouter
+import com.yandex.mapkit.Animation
 import com.yandex.mapkit.MapKit
 import com.yandex.mapkit.MapKitFactory
+import com.yandex.mapkit.map.CameraPosition
 
 class MainActivity : AppCompatActivity() {
     lateinit var mapkit: MapKit
@@ -72,6 +74,24 @@ class MainActivity : AppCompatActivity() {
             }
 
             pbLoading.visibility = View.GONE
+            fabFocus.setOnClickListener { zoom() }
         }
+    }
+
+    fun zoom() {
+        if (holder.location == null)
+            return
+        binding.mvMap.map.move( CameraPosition(
+            holder.location!!,
+            15f,
+            0f,
+            0f
+        ),
+            Animation(
+                Animation.Type.SMOOTH,
+                2f
+            ),
+            null
+        )
     }
 }

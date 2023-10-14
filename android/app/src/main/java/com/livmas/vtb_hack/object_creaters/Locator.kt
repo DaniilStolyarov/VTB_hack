@@ -25,7 +25,10 @@ class Locator(private val activity: MainActivity) {
                     override fun onLocationUpdated(p0: com.yandex.mapkit.location.Location) {
                         val loc = p0.position
                         Log.d(tag, "${loc.latitude}; ${loc.longitude}")
-                        holder.location = loc
+                        if (holder.location == null) {
+                            holder.location = loc
+                            activity.zoom()
+                        }
                     }
 
                     override fun onLocationStatusUpdated(p0: LocationStatus) {

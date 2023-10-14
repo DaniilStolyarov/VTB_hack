@@ -2,6 +2,7 @@ package com.livmas.vtb_hack.fragments
 
 import android.app.AlertDialog
 import android.app.Dialog
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View

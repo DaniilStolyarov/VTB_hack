@@ -27,7 +27,7 @@ class ResponseHandler(private val activity: MainActivity) {
                 for (i in body) {
                     val point = com.yandex.mapkit.geometry.Point(i.latitude, i.longitude)
                     activity.runOnUiThread {
-                        marker.putMark(point)
+                        marker.putMark(point, i.workload)
                     }
                 }
             }
