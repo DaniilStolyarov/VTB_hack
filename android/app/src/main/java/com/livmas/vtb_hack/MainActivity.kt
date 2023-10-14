@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         holder = MapObjectsHolder(binding.mvMap.map.mapObjects)
 
+
         binding.mvMap.map.isNightModeEnabled = true
 
         locator = Locator(this)
