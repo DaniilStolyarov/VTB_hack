@@ -47,6 +47,7 @@ class InputFragment : DialogFragment() {
                         criteria += (i as CheckedTextView).isChecked.toInt().toString()
 
                     mainActivity.binding.pbLoading.visibility = View.VISIBLE
+                    mainActivity.holder.clearMarks()
                     client.query(loc, criteria)
                     Log.d("http", criteria.length.toString())
                 }

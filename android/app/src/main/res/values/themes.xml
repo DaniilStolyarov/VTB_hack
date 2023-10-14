@@ -14,11 +14,15 @@
 
     <style name="Theme.VTB_hack" parent="Base.Theme.VTB_hack" />
 
-    <style name="ImageButton" parent="Widget.AppCompat.ImageButton">
+    <style name="ImageButton" parent="ImageButton.NoTint">
+
+
+    </style>
+
+    <style name="ImageButton.NoTint" parent="Widget.AppCompat.ImageButton">
         <item name="android:scaleType">fitCenter</item>
 
         <item name="backgroundTint">@color/blue</item>
-        <item name="tint">@color/white</item>
 
         <item name="android:layout_margin">10dp</item>
     </style>

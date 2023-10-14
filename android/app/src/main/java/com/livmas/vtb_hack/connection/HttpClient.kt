@@ -11,6 +11,7 @@ import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.lang.Exception
+import java.util.Date
 
 
 class HttpClient(private val activity: MainActivity) {
@@ -30,13 +31,16 @@ class HttpClient(private val activity: MainActivity) {
     fun query(point: Point, criteria: String) {
         Log.d(tag, "Criteria: $criteria")
 
+        val date = Date(System.currentTimeMillis())
+        val time = "${date.hours}:${date.minutes}"
+        Log.d(tag, time)
         val call = api.sendLocation(
             BankRequest(
                 point.latitude,
                 point.longitude,
                 criteria,
                 true,
-                "16:29"
+                "16:40"
             )
         )
 
