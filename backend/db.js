@@ -114,7 +114,8 @@ async function filterPoints({criteria, latitude, longitude, onlyDepartments, tim
     }
     else
     {
-        return client.query('select * from points where (criteria & $1::varbit(15)) = $1::varbit(15) order by |/((latitude - $2) ^ 2 + (longitude - $3) ^ 2) LIMIT 10', [criteria, latitude, longitude]);
+        // todo: 
+        return client.query('select * from points where (criteria & $1::varbit(15)) = $1::varbit(15) and type = \'0\'::varbit(1) order by |/((latitude - $2) ^ 2 + (longitude - $3) ^ 2) LIMIT 10', [criteria, latitude, longitude]);
     }
 }
 module.exports = {filterPoints}     
