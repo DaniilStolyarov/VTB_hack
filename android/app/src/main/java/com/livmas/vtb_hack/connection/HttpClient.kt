@@ -26,13 +26,16 @@ class HttpClient(private val activity: MainActivity) {
         handler = ResponseHandler(activity)
     }
 
-    fun query(point: Point) {
-        val call = api.sendLocation(
+    fun query(point: Point, criteria: String) {
+        Log.d(tag, "Criteria: $criteria")
 
+        val call = api.sendLocation(
             BankRequest(
                 point.latitude,
                 point.longitude,
-                "111000000000000"
+                criteria,
+                true,
+                "16:29"
             )
         )
 
@@ -44,7 +47,7 @@ class HttpClient(private val activity: MainActivity) {
                 Log.d(tag, "Response handled")
             }
             catch (e: Exception) {
-                Log.d(tag, e.message.toString())
+                Log.e(tag, e.message.toString())
             }
         }
     }
