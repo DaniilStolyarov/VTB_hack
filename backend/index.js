@@ -13,10 +13,10 @@ app.post('/destination', express.json(), async (req, res) =>
         return;
     }
     const answer = await db.filterPoints(req.body.criteria, req.body.latitude, req.body.longitude);
-    res.json(answer.rows.slice(0,5))
+    res.json(answer.rows)
     console.log(req.body)
     console.log('answer: ')
-    console.log(JSON.stringify(answer.rows.slice(0, 5)))
+    console.log(JSON.stringify(answer.rows))
 })
 
 app.listen(8080)
