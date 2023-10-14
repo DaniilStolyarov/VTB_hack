@@ -6,6 +6,7 @@ import com.livmas.vtb_hack.connection.HttpClient
 import com.livmas.vtb_hack.databinding.ActivityMainBinding
 import com.livmas.vtb_hack.object_creaters.Locator
 import com.livmas.vtb_hack.object_creaters.Marker
+import com.livmas.vtb_hack.object_creaters.TotalRouter
 import com.yandex.mapkit.MapKit
 import com.yandex.mapkit.MapKitFactory
 import com.yandex.mapkit.geometry.Point
@@ -17,6 +18,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var locator: Locator
     private lateinit var marker: Marker
+    lateinit var router: TotalRouter
 
     private val client = HttpClient(this)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,11 +28,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         holder = MapObjectsHolder(binding.mvMap.map.mapObjects)
 
-
         binding.mvMap.map.isNightModeEnabled = true
 
         locator = Locator(this)
         marker = Marker(this)
+        router = TotalRouter(binding.mvMap.map.mapObjects, holder)
 
         initButtons()
     }

@@ -13,6 +13,7 @@ import java.util.LinkedList
 class MapObjectsHolder(private val mapObjectsColl: MapObjectCollection) {
     private val currentObjects = EnumMap<MyObjects, MapObject>(MyObjects::class.java)
     private var animation = LinkedList<PolylineMapObject>()
+    private var points: List<Point> = listOf()
     var location: Point? = null
     var goal: Point? = null
 

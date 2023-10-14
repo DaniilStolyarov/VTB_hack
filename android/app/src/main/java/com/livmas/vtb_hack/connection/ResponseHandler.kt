@@ -1,5 +1,6 @@
 package com.livmas.vtb_hack.connection
 
+import android.util.Log
 import android.widget.Toast
 import com.livmas.vtb_hack.MainActivity
 import com.livmas.vtb_hack.R
@@ -23,11 +24,10 @@ class ResponseHandler(private val activity: MainActivity) {
 
         when (response.code()) {
             200 -> {
-
                 for (i in body) {
                     val point = com.yandex.mapkit.geometry.Point(i.latitude, i.longitude)
                     activity.runOnUiThread {
-                        marker.putToastMark(point)
+                        marker.putMark(point)
                     }
                 }
             }

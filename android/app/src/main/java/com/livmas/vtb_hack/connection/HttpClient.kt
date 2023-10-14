@@ -35,13 +35,14 @@ class HttpClient(private val activity: MainActivity) {
             BankRequest(
                 point.latitude,
                 point.longitude,
-                "111111111111111"
+                "111000000000000"
             )
         )
 
         CoroutineScope(Dispatchers.IO).launch{
             try {
                 val res = call.execute()
+                Log.d(tag, "Response appeared")
                 handler.handle(res)
                 Log.d(tag, "Response handled")
             }
