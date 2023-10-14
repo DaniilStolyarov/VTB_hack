@@ -1,0 +1,26 @@
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> f4bdcdcdff81d1b8b8b4a523a2aa1c399f5bc4f4
+*.iml
+.gradle
+/local.properties
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+=======
+<<<<<<< HEAD
+*/node_modules
+>>>>>>> 36d2543d261c331f5d5b7d818a9167b101195d99
+=======
+*/node_modules
+>>>>>>> f4bdcdcdff81d1b8b8b4a523a2aa1c399f5bc4f4

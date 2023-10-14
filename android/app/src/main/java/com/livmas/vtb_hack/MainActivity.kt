@@ -55,7 +55,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun initButtons() {
         binding.fabRequest.setOnClickListener {
-            client.query(Point(10.0, 23.0))
+            val loc = holder.location ?: return@setOnClickListener
+            client.query(Point())
         }
     }
 }

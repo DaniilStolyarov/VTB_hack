@@ -43,7 +43,6 @@ class HttpClient(private val activity: MainActivity) {
             catch (e: Exception) {
                 Log.d(tag, e.message.toString())
             }
-
         }
     }
 }

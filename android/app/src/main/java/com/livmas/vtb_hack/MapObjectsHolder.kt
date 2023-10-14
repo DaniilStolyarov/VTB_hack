@@ -14,6 +14,7 @@ class MapObjectsHolder(private val mapObjectsColl: MapObjectCollection) {
     private val currentObjects = EnumMap<MyObjects, MapObject>(MyObjects::class.java)
     private var animation = LinkedList<PolylineMapObject>()
     var location: Point? = null
+    var goal: Point? = null
 
     fun hasObject(obj: MyObjects): Boolean {
         return currentObjects[obj] != null
