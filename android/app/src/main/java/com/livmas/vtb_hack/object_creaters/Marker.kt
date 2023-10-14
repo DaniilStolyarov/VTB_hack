@@ -5,6 +5,7 @@ import com.livmas.vtb_hack.MainActivity
 import com.livmas.vtb_hack.R
 import com.yandex.mapkit.geometry.Point
 import com.yandex.mapkit.map.MapObjectTapListener
+import com.yandex.mapkit.map.PlacemarkMapObject
 import com.yandex.runtime.image.ImageProvider
 
 class Marker(private val activity: MainActivity) {
@@ -17,11 +18,11 @@ class Marker(private val activity: MainActivity) {
         }
         // ADD TO HOLDER
     }
-    private val placemarkTapListener = MapObjectTapListener { _, point ->
+    private val placemarkTapListener = MapObjectTapListener { it, _ ->
         if (activity.holder.location == null)
             return@MapObjectTapListener true
 
-        activity.holder.goal = point
+        activity.holder.goal = (it as PlacemarkMapObject).geometry
         activity.router.putDriving()
         true
     }
