@@ -1,5 +1,6 @@
 package com.livmas.vtb_hack.connection
 
+
 data class BankResponse(
     val address: String?,
     val latitude: Double,

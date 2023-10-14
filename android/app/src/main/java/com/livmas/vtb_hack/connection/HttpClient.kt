@@ -4,12 +4,16 @@ import android.util.Log
 import com.livmas.vtb_hack.BuildConfig
 import com.livmas.vtb_hack.MainActivity
 import com.yandex.mapkit.geometry.Point
+
+
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+
 import java.lang.Exception
+
 
 class HttpClient(private val activity: MainActivity) {
     private val tag = "http"
@@ -27,6 +31,7 @@ class HttpClient(private val activity: MainActivity) {
 
     fun query(point: Point) {
         val call = api.sendLocation(
+
             BankRequest(
                 point.latitude,
                 point.longitude,

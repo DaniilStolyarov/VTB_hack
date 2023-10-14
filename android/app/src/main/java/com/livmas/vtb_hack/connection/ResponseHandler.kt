@@ -8,7 +8,9 @@ import retrofit2.Response
 
 class ResponseHandler(private val activity: MainActivity) {
     private val marker = Marker(activity)
+
     fun handle(response: Response<List<BankResponse>>) {
+
         val body = response.body()
         if (body == null) {
             Toast.makeText(

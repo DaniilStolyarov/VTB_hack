@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         holder = MapObjectsHolder(binding.mvMap.map.mapObjects)
 
+
         binding.mvMap.map.isNightModeEnabled = true
 
         locator = Locator(this)
@@ -56,7 +57,7 @@ class MainActivity : AppCompatActivity() {
     private fun initButtons() {
         binding.fabRequest.setOnClickListener {
             val loc = holder.location ?: return@setOnClickListener
-            client.query(Point())
+            client.query(loc)
         }
     }
 }
