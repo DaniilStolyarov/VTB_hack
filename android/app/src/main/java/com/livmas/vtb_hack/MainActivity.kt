@@ -1,8 +1,8 @@
 package com.livmas.vtb_hack
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.livmas.vtb_hack.connection.HttpClient
 import com.livmas.vtb_hack.databinding.ActivityMainBinding
 import com.livmas.vtb_hack.enums.RouteType
 import com.livmas.vtb_hack.fragments.InputFragment
@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         marker = Marker(this)
         router = TotalRouter(binding.mvMap.map.mapObjects, holder)
 
-        initButtons()
+        initViews()
     }
 
     override fun onStart() {
@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity() {
         mapkit = MapKitFactory.getInstance()
     }
 
-    private fun initButtons() {
+    private fun initViews() {
         binding.apply {
             fabRequest.setOnClickListener {
                 val fragment = InputFragment()
@@ -70,6 +70,8 @@ class MainActivity : AppCompatActivity() {
             ibWalking.setOnClickListener {
                 router.type = RouteType.Walking
             }
+
+            pbLoading.visibility = View.GONE
         }
     }
 }

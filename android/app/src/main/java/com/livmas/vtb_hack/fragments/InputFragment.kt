@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.CheckedTextView
 import androidx.core.view.children
 import androidx.core.view.get
@@ -44,12 +45,12 @@ class InputFragment : DialogFragment() {
                     for (i in binding.llCriterias.children)
                         criteria += (i as CheckedTextView).isChecked.toInt().toString()
 
+                    mainActivity.binding.pbLoading.visibility = View.VISIBLE
                     client.query(loc, criteria)
                     Log.d("http", criteria.length.toString())
                 }
             }
             .setNegativeButton(R.string.cancel) {_, _ -> }
             .show()
-
     }
 }

@@ -1,6 +1,7 @@
 package com.livmas.vtb_hack.connection
 
 import android.util.Log
+import android.view.View
 import com.livmas.vtb_hack.BuildConfig
 import com.livmas.vtb_hack.MainActivity
 import com.yandex.mapkit.geometry.Point
@@ -44,6 +45,7 @@ class HttpClient(private val activity: MainActivity) {
                 val res = call.execute()
                 Log.d(tag, "Response appeared")
                 handler.handle(res)
+                activity.binding.pbLoading.visibility = View.GONE
                 Log.d(tag, "Response handled")
             }
             catch (e: Exception) {
