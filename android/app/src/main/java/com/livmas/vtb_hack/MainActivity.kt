@@ -4,6 +4,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.livmas.vtb_hack.connection.HttpClient
 import com.livmas.vtb_hack.databinding.ActivityMainBinding
+import com.livmas.vtb_hack.enums.RouteType
+import com.livmas.vtb_hack.fragments.InputFragment
 import com.livmas.vtb_hack.object_creaters.Locator
 import com.livmas.vtb_hack.object_creaters.Marker
 import com.livmas.vtb_hack.object_creaters.TotalRouter
@@ -19,7 +21,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var marker: Marker
     lateinit var router: TotalRouter
 
-    private val client = HttpClient(this)
     override fun onCreate(savedInstanceState: Bundle?) {
         presetMap()
         super.onCreate(savedInstanceState)
@@ -58,13 +59,17 @@ class MainActivity : AppCompatActivity() {
     private fun initButtons() {
         binding.apply {
             fabRequest.setOnClickListener {
-                val loc = holder.location ?: return@setOnClickListener
-                client.query(loc)
-            }
-            ibCar.setOnClickListener {
-                router.buildRoute()
+                val fragment = InputFragment()
+
+                fragment.show(supportFragmentManager, "123")
             }
 
+            ibCar.setOnClickListener {
+                router.type = RouteType.Driving
+            }
+            ibWalking.setOnClickListener {
+                router.type = RouteType.Walking
+            }
         }
     }
 }
