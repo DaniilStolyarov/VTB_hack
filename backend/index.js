@@ -19,7 +19,7 @@ app.post('/destination', express.json(), async (req, res) =>
         const answer = await db.filterPoints(req.body);
         res.json(answer.rows)
         console.log(req.body)
-        console.log(answer)
+        console.log(answer.rows)
         console.log('answer_rowCount: ', answer.rowCount)
     } catch (err)
     {
