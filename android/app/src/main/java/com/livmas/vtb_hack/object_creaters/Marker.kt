@@ -1,6 +1,5 @@
 package com.livmas.vtb_hack.object_creaters
 
-import android.widget.Toast
 import com.livmas.vtb_hack.MainActivity
 import com.livmas.vtb_hack.R
 import com.yandex.mapkit.geometry.Point
@@ -23,7 +22,7 @@ class Marker(private val activity: MainActivity) {
             return@MapObjectTapListener true
 
         activity.holder.goal = (it as PlacemarkMapObject).geometry
-        activity.router.putDriving()
+        activity.router.buildRoute()
         true
     }
 }

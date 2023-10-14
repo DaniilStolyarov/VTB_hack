@@ -9,7 +9,6 @@ import com.livmas.vtb_hack.object_creaters.Marker
 import com.livmas.vtb_hack.object_creaters.TotalRouter
 import com.yandex.mapkit.MapKit
 import com.yandex.mapkit.MapKitFactory
-import com.yandex.mapkit.geometry.Point
 
 class MainActivity : AppCompatActivity() {
     lateinit var mapkit: MapKit
@@ -57,9 +56,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initButtons() {
-        binding.fabRequest.setOnClickListener {
-            val loc = holder.location ?: return@setOnClickListener
-            client.query(loc)
+        binding.apply {
+            fabRequest.setOnClickListener {
+                val loc = holder.location ?: return@setOnClickListener
+                client.query(loc)
+            }
+            ibCar.setOnClickListener {
+                router.buildRoute()
+            }
+
         }
     }
 }
