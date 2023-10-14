@@ -10,11 +10,11 @@ async function createPointsTable()
         ADRESS TEXT,
         LATITUDE DECIMAL(8,6),
         LONGITUDE DECIMAL(9,6),
-        WORKTIME JSON,
         CRITERIA VARBIT(15),
         TYPE VARBIT(1),
-        WORKLOAD DECIMAL(5,2)
-    )`);
+        WORKLOAD DECIMAL(5,2),
+        OPEN_TIME TIME,
+        CLOSE_TIME TIME)`);
 }
 
 
@@ -44,20 +44,22 @@ async function writeRawPoints()
             ADRESS,
             LATITUDE,
             LONGITUDE,
-            WORKTIME,
             CRITERIA,
             TYPE,
-            WORKLOAD
+            WORKLOAD,
+            OPEN_TIME,
+            CLOSE_TIME
         ) VALUES(
         $1::TEXT,
         $2::DECIMAL(8,6),
         $3::DECIMAL(9,6),
-        $4::JSON,
-        $5::VARBIT(15),
-        $6::VARBIT(1),
-        $7::DECIMAL(5,2)
-        )`,[atm.address, atm.latitude, atm.longitude, atm.allDay,
-            criteria, 0, 0]) 
+        $4::VARBIT(15),
+        $5::VARBIT(1),
+        $6::DECIMAL(5,2),
+        $7::TIME,
+        $8::TIME
+        )`,[atm.address, atm.latitude, atm.longitude,
+            criteria, 0, 0, "00:00", "23:59:59"]) 
         // todo : think about time
         console.log(i)
         i++
@@ -67,37 +69,48 @@ async function writeRawPoints()
     for (let office of offices)
     {
         const criteria = genRandomCriteria();
+        const officeTime = ["8:00-20:00", "9:00-21:00", "10:00-17:00"]
         await client.query(`INSERT INTO POINTS(
             ADRESS,
             LATITUDE,
             LONGITUDE,
-            WORKTIME,
             CRITERIA,
             TYPE,
-            WORKLOAD
+            WORKLOAD,
+            OPEN_TIME,
+            CLOSE_TIME
         ) VALUES(
         $1::TEXT,
         $2::DECIMAL(8,6),
         $3::DECIMAL(9,6),
-        $4::JSON,
-        $5::VARBIT(15),
-        $6::VARBIT(1),
-        $7::DECIMAL(5,2)
+        $4::VARBIT(15),
+        $5::VARBIT(1),
+        $6::DECIMAL(5,2),
+        $7::TIME,
+        $8::TIME
         )`,[office.address, office.latitude, office.longitude, 
-            {openHours: office.openHours, openHoursIndividual: office.openHoursIndividual},
-            criteria, 1, Math.random() * 100]) 
+            criteria, 1, Math.random() * 100,
+            officeTime[i % 3].split('-')[0], officeTime[i % 3].split('-')[1]]
+        )
         console.log(i)
         i++
     }
     
         
 }
-async function filterPoints({criteria, latitude, longitude, onlyDepartments})
+async function filterPoints({criteria, latitude, longitude, onlyDepartments, time})
 {
     if (criteria.length !== 15) return;
     if (onlyDepartments)
     {
-        return client.query('select * from points where (criteria & $1::varbit(15)) = $1::varbit(15) AND type = \'1\'::varbit(1) order by |/((latitude - $2) ^ 2 + (longitude - $3) ^ 2) LIMIT 10', [criteria, latitude, longitude]);
+        // select * from points where (criteria & $1::varbit(15)) = $1::varbit(15) AND type = \'1\'::varbit(1) order by |/((latitude - $2) ^ 2 + (longitude - $3) ^ 2) LIMIT 10
+        // 
+        return client.query(`select *,
+        $4::time + ('1 hour'::interval * (sqrt((100 * (latitude - 55.660496)) ^ 2  + (30075 * (longitude - 37.474543) / 360)^2) / 15 + workload / 100)) as estimated
+        from points where (criteria & $1::varbit(15)) = $1::varbit(15) AND (type = '1'::varbit(1))
+        and ($4::time + ('1 hour'::interval * (sqrt((100 * (latitude - 55.660496)) ^ 2  + (30075 * (longitude - 37.474543) / 360)^2) / 15 + workload / 100)) < CLOSE_TIME)
+        and ($4::time + ('1 hour'::interval * (sqrt((100 * (latitude - 55.660496)) ^ 2  + (30075 * (longitude - 37.474543) / 360)^2) / 15 + workload / 100)) > OPEN_TIME)
+         order by |/((latitude - $2) ^ 2 + (longitude - $3) ^ 2) LIMIT 10`, [criteria, latitude, longitude, time]);
     }
     else
     {

@@ -7,16 +7,18 @@ const app = express();
 
 app.post('/destination', express.json(), async (req, res) =>
 {
-    if (!req.body.criteria) 
+    const {time, criteria, latitude, longitude} = req.body;
+    if (!time || !criteria || !latitude || !longitude)
     {
-        res.send('err: no criteria specified')
+        res.send('json must have time_ms, criteria, latitude, longtitude fields')
         return;
     }
     const answer = await db.filterPoints(req.body);
     res.json(answer.rows)
     console.log(req.body)
-    console.log('answer: ')
-    console.log(JSON.stringify(answer.rows))
+    console.log('answer_rowCount: ', answer.rowCount)
+   
+    
 })
 
 app.listen(8080)
