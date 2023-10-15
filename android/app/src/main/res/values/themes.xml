@@ -25,6 +25,7 @@
         <item name="backgroundTint">@color/blue</item>
 
         <item name="android:layout_margin">10dp</item>
+        <item name="android:background">@drawable/rounded_background</item>
     </style>
 
     <style name="FloatActionButton" parent="Widget.Design.FloatingActionButton">

@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.mvMap.map.isNightModeEnabled = true
 
-        locator = Locator(mapkit, binding.mvMap.mapWindow, holder)
+        locator = Locator(mapkit, binding.mvMap, holder)
         marker = Marker(this)
         router = TotalRouter(binding.mvMap.map.mapObjects, holder)
 
@@ -75,6 +75,9 @@ class MainActivity : AppCompatActivity() {
             }
             ibWalking.setOnClickListener {
                 router.type = RouteType.Walking
+            }
+            ibMasstransit.setOnClickListener {
+                router.type = RouteType.Mass
             }
 
             pbLoading.visibility = View.GONE

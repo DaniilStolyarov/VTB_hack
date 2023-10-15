@@ -7,10 +7,11 @@ import com.yandex.mapkit.map.MapObjectCollection
 class TotalRouter(mapObjects: MapObjectCollection, private val holder: MapObjectsHolder) {
     private val driving: CarRouter
     private val walking: WalkingRouter
+    private val mass: MassRouter
     var type: RouteType = RouteType.Driving
 
     init {
-
+        mass = MassRouter(mapObjects, holder)
         driving = CarRouter(mapObjects, holder)
         walking = WalkingRouter(mapObjects, holder)
     }
@@ -19,6 +20,7 @@ class TotalRouter(mapObjects: MapObjectCollection, private val holder: MapObject
         when (type) {
             RouteType.Driving -> putDriving()
             RouteType.Walking -> putWalking()
+            RouteType.Mass -> putMass()
         }
     }
 
@@ -33,6 +35,13 @@ class TotalRouter(mapObjects: MapObjectCollection, private val holder: MapObject
         holder.location?.let { loc ->
             holder.goal?.let { goal ->
                 walking.createWalkingRoute(loc, goal)
+            }
+        }
+    }
+    private fun putMass() {
+        holder.location?.let { loc ->
+            holder.goal?.let { goal ->
+                mass.createRoute(loc, goal)
             }
         }
     }
