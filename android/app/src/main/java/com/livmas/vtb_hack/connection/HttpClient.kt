@@ -43,13 +43,17 @@ class HttpClient(private val activity: MainActivity) {
                 "16:40"
             )
         )
+        Log.d(tag, "Call performed")
 
         CoroutineScope(Dispatchers.IO).launch{
             try {
                 val res = call.execute()
                 Log.d(tag, "Response appeared")
                 handler.handle(res)
-                activity.binding.pbLoading.visibility = View.GONE
+                activity.runOnUiThread {
+                    activity.binding.pbLoading.visibility = View.GONE
+
+                }
                 Log.d(tag, "Response handled")
             }
             catch (e: Exception) {

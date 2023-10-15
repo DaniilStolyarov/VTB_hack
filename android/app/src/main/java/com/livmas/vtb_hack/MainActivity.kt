@@ -1,8 +1,11 @@
 package com.livmas.vtb_hack
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import com.livmas.vtb_hack.databinding.ActivityMainBinding
 import com.livmas.vtb_hack.enums.RouteType
 import com.livmas.vtb_hack.fragments.InputFragment
@@ -24,6 +27,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var router: TotalRouter
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        grantLocationPermissions()
         presetMap()
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -32,7 +36,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.mvMap.map.isNightModeEnabled = true
 
-        locator = Locator(this)
+        locator = Locator(mapkit, binding.mvMap.mapWindow, holder)
         marker = Marker(this)
         router = TotalRouter(binding.mvMap.map.mapObjects, holder)
 
@@ -78,7 +82,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun zoom() {
+    private fun zoom() {
         if (holder.location == null)
             return
         binding.mvMap.map.move( CameraPosition(
@@ -93,5 +97,12 @@ class MainActivity : AppCompatActivity() {
             ),
             null
         )
+    }
+
+
+    private fun grantLocationPermissions() {
+        if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+            checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION), 0)
     }
 }

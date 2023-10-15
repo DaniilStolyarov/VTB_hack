@@ -1,6 +1,8 @@
 package com.livmas.vtb_hack
 
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.livmas.vtb_hack.enums.MyObjects
 import com.yandex.mapkit.geometry.Point
 import com.yandex.mapkit.map.MapObject
@@ -18,6 +20,10 @@ class MapObjectsHolder(private val mapObjectsColl: MapObjectCollection) {
     var location: Point? = null
     var goal: Point? = null
 
+    companion object {
+        val tag = "MapObjs"
+    }
+
     fun hasObject(obj: MyObjects): Boolean {
         return currentObjects[obj] != null
     }
@@ -30,7 +36,7 @@ class MapObjectsHolder(private val mapObjectsColl: MapObjectCollection) {
 
     fun removeRoute() {
         if (currentObjects[MyObjects.ROUTE] == null) {
-            Log.d("route", "Nothing to cancel")
+            Log.d(tag, "Nothing to cancel")
             return
         }
         try {
@@ -38,7 +44,7 @@ class MapObjectsHolder(private val mapObjectsColl: MapObjectCollection) {
             currentObjects.remove(MyObjects.ROUTE)
         }
         catch (e: Exception) {
-            Log.e("route", e.message.toString())
+            Log.e(tag, e.message.toString())
         }
     }
 
@@ -49,7 +55,7 @@ class MapObjectsHolder(private val mapObjectsColl: MapObjectCollection) {
             }
         }
         catch (e: Exception) {
-            Log.e("route", e.message.toString())
+            Log.e(tag, e.message.toString())
         }
     }
     fun removeAnimation() {
@@ -59,7 +65,7 @@ class MapObjectsHolder(private val mapObjectsColl: MapObjectCollection) {
             }
         }
         catch (e: Exception) {
-            Log.e("route", e.message.toString())
+            Log.e(tag, e.message.toString())
         }
     }
 

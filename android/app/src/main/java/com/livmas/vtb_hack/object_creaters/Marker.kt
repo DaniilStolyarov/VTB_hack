@@ -1,6 +1,8 @@
 package com.livmas.vtb_hack.object_creaters
 
+import android.util.Log
 import com.livmas.vtb_hack.MainActivity
+import com.livmas.vtb_hack.MapObjectsHolder
 import com.livmas.vtb_hack.R
 import com.yandex.mapkit.geometry.Point
 import com.yandex.mapkit.map.IconStyle
@@ -27,7 +29,7 @@ class Marker(private val activity: MainActivity) {
             setIcon(imageProvider)
             addTapListener(placemarkTapListener)
             setIconStyle(
-                IconStyle(null, RotationType.ROTATE, null, null, null, 0.0005f, null)
+                IconStyle(null, RotationType.ROTATE, null, null, null, 0.1f, null)
             )
         }
 
