@@ -1,44 +1,53 @@
 package com.livmas.vtb_hack.object_creaters
 
-import android.Manifest
 import android.util.Log
-import androidx.core.app.ActivityCompat
-import androidx.core.content.PermissionChecker
-import androidx.core.content.PermissionChecker.checkSelfPermission
-import com.livmas.vtb_hack.MainActivity
+import com.livmas.vtb_hack.MapObjectsHolder
+import com.yandex.mapkit.Animation
+import com.yandex.mapkit.MapKit
 import com.yandex.mapkit.location.FilteringMode
 import com.yandex.mapkit.location.LocationStatus
+import com.yandex.mapkit.map.CameraPosition
+import com.yandex.mapkit.mapview.MapView
 
-class Locator(private val activity: MainActivity) {
-    private val tag = "location"
-
+class Locator(mapkit: MapKit, private val mapView: MapView, private val holder: MapObjectsHolder) {
+    val tag = "location"
     init {
-        grantLocationPermissions()
+        val locationLayer = mapkit.createUserLocationLayer(mapView.mapWindow)
+        locationLayer.isVisible = true
 
-        activity.apply {
-            val locationLayer = mapkit.createUserLocationLayer(binding.mvMap.mapWindow)
-            locationLayer.isVisible = true
-
-            mapkit.createLocationManager().subscribeForLocationUpdates(
-                0.0, 0, 0.0, true, FilteringMode.ON,
-                object:com.yandex.mapkit.location.LocationListener {
-                    override fun onLocationUpdated(p0: com.yandex.mapkit.location.Location) {
-                        val loc = p0.position
-                        Log.d(tag, "${loc.latitude}; ${loc.longitude}")
+        mapkit.createLocationManager().subscribeForLocationUpdates(
+            0.0, 0, 0.0, true, FilteringMode.ON,
+            object:com.yandex.mapkit.location.LocationListener {
+                override fun onLocationUpdated(p0: com.yandex.mapkit.location.Location) {
+                    val loc = p0.position
+                    Log.d(tag, "${loc.latitude}; ${loc.longitude}")
+                    if (holder.location == null) {
                         holder.location = loc
+                        zoom()
                     }
+                }
 
-                    override fun onLocationStatusUpdated(p0: LocationStatus) {
-                        Log.d(tag, "Status: ${p0.name}")
-                    }
-                })
-        }
-
+                override fun onLocationStatusUpdated(p0: LocationStatus) {
+                    Log.d(tag, "Status: ${p0.name}")
+                }
+            })
     }
 
-    private fun grantLocationPermissions() {
-        if (checkSelfPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION) != PermissionChecker.PERMISSION_GRANTED &&
-            checkSelfPermission(activity, Manifest.permission.ACCESS_COARSE_LOCATION) != PermissionChecker.PERMISSION_GRANTED)
-            ActivityCompat.requestPermissions(activity, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION), 0)
+    private fun zoom() {
+        if (holder.location == null)
+            return
+        mapView.map.move(
+            CameraPosition(
+                holder.location!!,
+                15f,
+                0f,
+                0f
+            ),
+            Animation(
+                Animation.Type.LINEAR,
+                2f
+            ),
+            null
+        )
     }
 }

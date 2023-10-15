@@ -51,9 +51,4 @@ class PolylineAnimator(
         })
         valueAnimator.start()
     }
-
-    fun setLineAttrs(attrs: PolylineAttrs) {
-
-    }
-
 }

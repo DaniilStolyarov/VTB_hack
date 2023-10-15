@@ -8,5 +8,9 @@ data class BankRequest(
     @SerializedName("longitude")
     val longitude: Double,
     @SerializedName("criteria")
-    val criteria: String
+    val criteria: String,
+    @SerializedName("onlyDepartments")
+    val onlyDepartments: Boolean,
+    @SerializedName("time")
+    val time: String
 )
