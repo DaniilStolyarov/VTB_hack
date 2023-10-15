@@ -12,7 +12,7 @@ app.post('/destination', express.json(), async (req, res) =>
         res.send('err: no criteria specified')
         return;
     }
-    const answer = await db.filterPoints(req.body.criteria, req.body.latitude, req.body.longitude);
+    const answer = await db.filterPoints(req.body);
     res.json(answer.rows)
     console.log(req.body)
     console.log('answer: ')
